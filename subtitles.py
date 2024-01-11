@@ -2,6 +2,8 @@ import speech_recognition as sr
 from moviepy.editor import VideoFileClip
 from pydub import AudioSegment
 import os
+import argparse
+
 
 def extract_audio(video_file, audio_file):
     video = VideoFileClip(video_file)
@@ -31,7 +33,13 @@ def recognize_speech_from_audio(file_path, language="en-US"):
         except sr.RequestError as e:
             return f"[Lỗi yêu cầu: {e}]"
 
-video_file = "Tamarisk.mp4"
+
+parser = argparse.ArgumentParser(description='Example script with a video argument')
+parser.add_argument('--video', help='video to process')
+args = parser.parse_args()
+
+
+video_file = args.video
 audio_file = "Tamarisk.wav"
 chunk_length_ms = 10000  # Thời gian của mỗi phần (ví dụ: 30 giây)
 
